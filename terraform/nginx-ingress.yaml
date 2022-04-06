@@ -2,18 +2,17 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: minimal-ingress
-  # namespace: ingress-nginx
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: letsencrypt-cluster-issuer
 spec:
   tls:
    - secretName: letsencrypt-cert-tls
      hosts:
-     -  host1
-     -  host2
+     -  nginx.shuko.fans
   rules:
-   - host: host1
+   - host: nginx.shuko.fans
      http:
       paths:
       - path: /
